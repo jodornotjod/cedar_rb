@@ -1,0 +1,24 @@
+!!!
+%html
+%head
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  %link{ rel: "stylesheet", href: "https://necolas.github.io/normalize.css/7.0.0/normalize.css" }
+  %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags 
+%body
+  %header.main_header
+    %span.logo
+      = link_to image_tag("https://s26.postimg.org/62ux20qeh/cedar-logo.png"), "/"
+    #buttons
+      - if user_signed_in?
+        = link_to "Settings", edit_user_registration_path
+        = link_to "Sign out", destroy_user_session_path, method: :delete
+      - else
+        = link_to "Sign up", new_user_registration_path
+        = link_to "Sign in", new_user_session_path
+.wrapper
+  %p.notice= notice
+  %p.alert= alert
+
+  = yield

@@ -1,0 +1,13 @@
+#post_container
+    %p= @post.user.email
+    %p= @post.content
+    - if user_signed_in?
+        - if current_user.email == @post.user.email
+            = link_to "Edit", edit_post_path(@post)
+            = link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
+    #comments
+        %p= @post.comments.count
+        = render @post.comments
+        %br
+        - if user_signed_in? 
+            = render "comments/form" 

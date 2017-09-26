@@ -1,0 +1,11 @@
+- if user_signed_in? 
+  = render 'form'
+#posts
+  - @posts.each do |post|
+    %br
+    %br
+    = post.user.email
+    %p.date
+    = time_ago_in_words(post.created_at).capitalize
+    ago
+    %p.post_content= link_to post.content, post
